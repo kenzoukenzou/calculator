@@ -27,12 +27,18 @@ class App extends Component {
   // メモリー機能
   memory = cmd => {
     if (cmd === "M+") {
+      if (this.state.calc_result == "") {
+        return;
+      }
       this.setState({
         memory: this.state.memory + eval(this.state.calc_result),
         calc_result: "",
         display_result: eval(this.state.calc_result)
       });
     } else if (cmd === "M-") {
+      if (this.state.calc_result == "") {
+        return;
+      }
       this.setState({
         memory: this.state.memory - eval(this.state.calc_result),
         calc_result: "",
