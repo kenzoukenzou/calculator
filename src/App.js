@@ -49,7 +49,7 @@ class App extends Component {
   render() {
     return (
       <div className="container text-center custom-middle">
-        <div className="row mb-3">
+        <div className="row">
           <div className="col font-weight-bold">
             メモリ: {this.state.memory}
           </div>
@@ -70,7 +70,6 @@ class App extends Component {
           >
             MC
           </div>
-          <div className="col mr-1 btn btn-outline-success">MR</div>
           <div
             className="col mr-1 btn btn-outline-success"
             onClick={e => this.memory("M-")}
@@ -91,7 +90,6 @@ class App extends Component {
           </div>
         </div>
         <div className="row mt-3">
-          <div className="col mr-1 text-white" />
           <div className="btn btn-light col mr-1" onClick={e => this.calc("7")}>
             7
           </div>
@@ -109,7 +107,6 @@ class App extends Component {
           </div>
         </div>
         <div className="row mt-3">
-          <div className="col mr-1 text-white" />
           <div className="btn btn-light col mr-1" onClick={e => this.calc("4")}>
             4
           </div>
@@ -127,7 +124,6 @@ class App extends Component {
           </div>
         </div>
         <div className="row mt-3">
-          <div className="col mr-1 btn btn-success">C</div>
           <div className="btn btn-light col mr-1" onClick={e => this.calc("1")}>
             1
           </div>
@@ -145,12 +141,6 @@ class App extends Component {
           </div>
         </div>
         <div className="row mt-3">
-          <div
-            className="col mr-1 btn btn-success"
-            onClick={e => this.calc("AC")}
-          >
-            AC
-          </div>
           <div className="btn btn-light col mr-1" onClick={e => this.calc("0")}>
             0
           </div>
@@ -168,6 +158,15 @@ class App extends Component {
             onClick={e => this.calc("=")}
           >
             =
+          </div>
+        </div>
+        <div className="row mt-3">
+          <div className="col mr-1 btn btn-success">C</div>
+          <div
+            className="col mr-1 btn btn-success"
+            onClick={e => this.calc("AC")}
+          >
+            AC
           </div>
         </div>
       </div>
