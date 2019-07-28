@@ -2,9 +2,12 @@ import React, { Component } from "react";
 
 class App extends Component {
   state = {
-    calc_result: ""
+    calc_result: "",
+    display_result: "",
+    memory: 0
   };
 
+  // 四則演算
   calc = cmd => {
     if (cmd == "=") {
       this.setState({
@@ -21,15 +24,54 @@ class App extends Component {
     }
   };
 
+  // メモリー機能
+  memory = cmd => {
+    if (cmd == "M+") {
+      this.setState({
+        memory: this.state.memory + eval(this.state.calc_result),
+        calc_result: "",
+        display_result: eval(this.state.calc_result)
+      });
+    } else if (cmd == "M-") {
+      this.setState({
+        memory: this.state.memory - eval(this.state.calc_result),
+        calc_result: "",
+        display_result: eval(this.state.calc_result)
+      });
+    } else if (cmd == "MR") {
+    } else if (cmd == "MC") {
+      this.setState({
+        memory: 0
+      });
+    }
+  };
+
   render() {
     return (
       <div className="container text-center custom-middle">
+        <p>memory: {this.state.memory}</p>
+        <p>result: {this.state.display_result}</p>
         <input type="text" name="text" value={this.state.calc_result} />
         <div className="row">
-          <div className="col mr-1 bg-danger text-white">MC</div>
+          <div
+            className="col mr-1 bg-danger text-white"
+            onClick={e => this.memory("MC")}
+          >
+            MC
+          </div>
           <div className="col mr-1 bg-danger text-white">MR</div>
-          <div className="col mr-1 bg-danger text-white">M-</div>
-          <div className="col mr-1 bg-danger text-white">M+</div>
+          <div
+            className="col mr-1 bg-danger text-white"
+            onClick={e => this.memory("M-")}
+          >
+            M-
+          </div>
+          <div
+            className="col mr-1 bg-danger text-white"
+            onClick={e => this.memory("M+")}
+          >
+            M+
+          </div>
           <div
             className="col mr-1 bg-danger text-white"
             onClick={e => this.calc("*")}
