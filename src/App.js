@@ -38,7 +38,6 @@ class App extends Component {
         calc_result: "",
         display_result: eval(this.state.calc_result)
       });
-    } else if (cmd === "MR") {
     } else if (cmd === "MC") {
       this.setState({
         memory: 0
@@ -49,7 +48,7 @@ class App extends Component {
   render() {
     return (
       <div className="container text-center custom-middle">
-        <div className="row">
+        <div className="row result_field">
           <div className="col font-weight-bold">
             メモリ: {this.state.memory}
           </div>
@@ -64,110 +63,144 @@ class App extends Component {
           value={this.state.calc_result}
         />
         <div className="row">
-          <div
+          <button
             className="col mr-1 btn btn-outline-success"
             onClick={e => this.memory("MC")}
           >
             MC
-          </div>
-          <div
+          </button>
+          <button
             className="col mr-1 btn btn-outline-success"
             onClick={e => this.memory("M-")}
           >
             M-
-          </div>
-          <div
+          </button>
+          <button
             className="col mr-1 btn btn-outline-success"
             onClick={e => this.memory("M+")}
           >
             M+
-          </div>
-          <div
+          </button>
+          <button
             className="col mr-1 btn btn-success"
             onClick={e => this.calc("*")}
           >
             ×
-          </div>
+          </button>
         </div>
-        <div className="row mt-3">
-          <div className="btn btn-light col mr-1" onClick={e => this.calc("7")}>
+        <div className="row mt-1">
+          <button
+            type="button"
+            className="btn btn-light col mr-1"
+            onClick={e => this.calc("7")}
+          >
             7
-          </div>
-          <div className="btn btn-light col mr-1" onClick={e => this.calc("8")}>
+          </button>
+          <button
+            className="btn btn-light col mr-1"
+            onClick={e => this.calc("8")}
+          >
             8
-          </div>
-          <div className="btn btn-light col mr-1" onClick={e => this.calc("9")}>
+          </button>
+          <button
+            className="btn btn-light col mr-1"
+            onClick={e => this.calc("9")}
+          >
             9
-          </div>
-          <div
+          </button>
+          <button
             className="col mr-1 btn btn-success"
             onClick={e => this.calc("+")}
           >
             ＋
-          </div>
+          </button>
         </div>
-        <div className="row mt-3">
-          <div className="btn btn-light col mr-1" onClick={e => this.calc("4")}>
+        <div className="row mt-1">
+          <button
+            className="btn btn-light col mr-1"
+            onClick={e => this.calc("4")}
+          >
             4
-          </div>
-          <div className="btn btn-light col mr-1" onClick={e => this.calc("5")}>
+          </button>
+          <button
+            className="btn btn-light col mr-1"
+            onClick={e => this.calc("5")}
+          >
             5
-          </div>
-          <div className="btn btn-light col mr-1" onClick={e => this.calc("6")}>
+          </button>
+          <button
+            className="btn btn-light col mr-1"
+            onClick={e => this.calc("6")}
+          >
             6
-          </div>
-          <div
+          </button>
+          <button
             className="col mr-1 btn btn-success"
             onClick={e => this.calc("/")}
           >
             ÷
-          </div>
+          </button>
         </div>
-        <div className="row mt-3">
-          <div className="btn btn-light col mr-1" onClick={e => this.calc("1")}>
+        <div className="row mt-1">
+          <button
+            className="btn btn-light col mr-1"
+            onClick={e => this.calc("1")}
+          >
             1
-          </div>
-          <div className="btn btn-light col mr-1" onClick={e => this.calc("2")}>
+          </button>
+          <button
+            className="btn btn-light col mr-1"
+            onClick={e => this.calc("2")}
+          >
             2
-          </div>
-          <div className="btn btn-light col mr-1" onClick={e => this.calc("3")}>
+          </button>
+          <button
+            className="btn btn-light col mr-1"
+            onClick={e => this.calc("3")}
+          >
             3
-          </div>
-          <div
+          </button>
+          <button
             className="col mr-1 btn btn-success"
             onClick={e => this.calc("-")}
           >
             -
-          </div>
+          </button>
         </div>
-        <div className="row mt-3">
-          <div className="btn btn-light col mr-1" onClick={e => this.calc("0")}>
+        <div className="row mt-1">
+          <button
+            className="btn btn-light col mr-1"
+            onClick={e => this.calc("0")}
+          >
             0
-          </div>
-          <div
+          </button>
+          <button
             className="btn btn-light col mr-1"
             onClick={e => this.calc("00")}
           >
             00
-          </div>
-          <div className="btn btn-light col mr-1" onClick={e => this.calc(".")}>
+          </button>
+          <button
+            className="btn btn-light col mr-1"
+            onClick={e => this.calc(".")}
+          >
             ・
-          </div>
-          <div
+          </button>
+          <button
             className="col mr-1 btn btn-success"
             onClick={e => this.calc("=")}
           >
             =
-          </div>
+          </button>
         </div>
-        <div className="row mt-3">
-          <div className="col mr-1 btn btn-success">C</div>
-          <div
+        <div className="row mt-1">
+          <button className="col mr-1 btn btn-success">C</button>
+          <button
             className="col mr-1 btn btn-success"
             onClick={e => this.calc("AC")}
           >
             AC
-          </div>
+          </button>
         </div>
       </div>
     );
