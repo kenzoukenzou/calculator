@@ -30,7 +30,6 @@ class App extends Component {
           calc_component_array: this.state.calc_component_array.concat(cmd)
         });
       }
-
       const cmd_and_num = [this.state.calc_component, cmd];
       this.setState({
         calc_component_array: this.state.calc_component_array.concat(
@@ -67,7 +66,7 @@ class App extends Component {
   // メモリー機能(M+/M-/MC)
   memory = cmd => {
     if (cmd === "M+") {
-      if (this.state.formula == "") {
+      if (this.state.formula === "") {
         return;
       }
       this.setState({
@@ -78,7 +77,7 @@ class App extends Component {
         calc_component: ""
       });
     } else if (cmd === "M-") {
-      if (this.state.formula == "") {
+      if (this.state.formula === "") {
         return;
       }
       this.setState({
@@ -94,6 +93,68 @@ class App extends Component {
       });
     }
   };
+
+  // 各種レンダリング
+  renderNum(i) {
+    return (
+      <button className="btn btn-light col mr-1" onClick={e => this.adnum(i)}>
+        {i}
+      </button>
+    );
+  }
+
+  renderCalc(cmd) {
+    if (cmd === "/") {
+      return (
+        <button
+          className="col mr-1 btn btn-success"
+          onClick={e => this.calc(cmd)}
+        >
+          ÷
+        </button>
+      );
+    } else if (cmd === "*") {
+      return (
+        <button
+          className="col mr-1 btn btn-success"
+          onClick={e => this.calc(cmd)}
+        >
+          ×
+        </button>
+      );
+    }
+
+    return (
+      <button
+        className="col mr-1 btn btn-success"
+        onClick={e => this.calc(cmd)}
+      >
+        {cmd}
+      </button>
+    );
+  }
+
+  renderMemory(cmd) {
+    return (
+      <button
+        className="col mr-1 btn btn-outline-success"
+        onClick={e => this.memory(cmd)}
+      >
+        {cmd}
+      </button>
+    );
+  }
+
+  renderClear(cmd) {
+    return (
+      <button
+        className="col mr-1 btn btn-success"
+        onClick={e => this.clear(cmd)}
+      >
+        {cmd}
+      </button>
+    );
+  }
 
   render() {
     return (
@@ -113,149 +174,38 @@ class App extends Component {
           value={this.state.formula}
         />
         <div className="row">
-          <button
-            className="col mr-1 btn btn-outline-success"
-            onClick={e => this.memory("MC")}
-          >
-            MC
-          </button>
-          <button
-            className="col mr-1 btn btn-outline-success"
-            onClick={e => this.memory("M-")}
-          >
-            M-
-          </button>
-          <button
-            className="col mr-1 btn btn-outline-success"
-            onClick={e => this.memory("M+")}
-          >
-            M+
-          </button>
-          <button
-            className="col mr-1 btn btn-success"
-            onClick={e => this.calc("*")}
-          >
-            ×
-          </button>
+          {this.renderMemory("MC")}
+          {this.renderMemory("M-")}
+          {this.renderMemory("M+")}
+          {this.renderCalc("*")}
         </div>
         <div className="row mt-1">
-          <button
-            type="button"
-            className="btn btn-light col mr-1"
-            onClick={e => this.adnum("7")}
-          >
-            7
-          </button>
-          <button
-            className="btn btn-light col mr-1"
-            onClick={e => this.adnum("8")}
-          >
-            8
-          </button>
-          <button
-            className="btn btn-light col mr-1"
-            onClick={e => this.adnum("9")}
-          >
-            9
-          </button>
-          <button
-            className="col mr-1 btn btn-success"
-            onClick={e => this.calc("+")}
-          >
-            ＋
-          </button>
+          {this.renderNum(7)}
+          {this.renderNum(8)}
+          {this.renderNum(9)}
+          {this.renderCalc("+")}
         </div>
         <div className="row mt-1">
-          <button
-            className="btn btn-light col mr-1"
-            onClick={e => this.adnum("4")}
-          >
-            4
-          </button>
-          <button
-            className="btn btn-light col mr-1"
-            onClick={e => this.adnum("5")}
-          >
-            5
-          </button>
-          <button
-            className="btn btn-light col mr-1"
-            onClick={e => this.adnum("6")}
-          >
-            6
-          </button>
-          <button
-            className="col mr-1 btn btn-success"
-            onClick={e => this.calc("/")}
-          >
-            ÷
-          </button>
+          {this.renderNum(4)}
+          {this.renderNum(5)}
+          {this.renderNum(6)}
+          {this.renderCalc("/")}
         </div>
         <div className="row mt-1">
-          <button
-            className="btn btn-light col mr-1"
-            onClick={e => this.adnum("1")}
-          >
-            1
-          </button>
-          <button
-            className="btn btn-light col mr-1"
-            onClick={e => this.adnum("2")}
-          >
-            2
-          </button>
-          <button
-            className="btn btn-light col mr-1"
-            onClick={e => this.adnum("3")}
-          >
-            3
-          </button>
-          <button
-            className="col mr-1 btn btn-success"
-            onClick={e => this.calc("-")}
-          >
-            -
-          </button>
+          {this.renderNum(1)}
+          {this.renderNum(2)}
+          {this.renderNum(3)}
+          {this.renderCalc("-")}
         </div>
         <div className="row mt-1">
-          <button
-            className="btn btn-light col mr-1"
-            onClick={e => this.adnum("0")}
-          >
-            0
-          </button>
-          <button
-            className="btn btn-light col mr-1"
-            onClick={e => this.adnum("00")}
-          >
-            00
-          </button>
-          <button
-            className="btn btn-light col mr-1"
-            onClick={e => this.adnum(".")}
-          >
-            ・
-          </button>
-          <button
-            className="col mr-1 btn btn-success"
-            onClick={e => this.calc("=")}
-          >
-            =
-          </button>
+          {this.renderNum(0)}
+          {this.renderNum("00")}
+          {this.renderNum(".")}
+          {this.renderCalc("=")}
         </div>
         <div className="row mt-1">
-          <button
-            className="col mr-1 btn btn-success"
-            onClick={e => this.clear("C")}
-          >
-            C
-          </button>
-          <button
-            className="col mr-1 btn btn-success"
-            onClick={e => this.clear("AC")}
-          >
-            AC
-          </button>
+          {this.renderClear("C")}
+          {this.renderClear("AC")}
         </div>
       </div>
     );
