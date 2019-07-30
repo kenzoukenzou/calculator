@@ -56,7 +56,9 @@ class App extends Component {
   clear = cmd => {
     if (cmd === "AC") {
       this.setState({
-        formula: ""
+        formula: "",
+        calc_component: "",
+        calc_component_array: []
       });
     } else if (cmd === "C") {
       if (this.state.calc_component === "") {
