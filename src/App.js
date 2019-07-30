@@ -6,6 +6,7 @@ class App extends Component {
     display_result: 0,
     memory: 0,
     calc_component: "", //入力中の数値を一時的に保管
+    operator: "", //入力中の演算子を一時的に保管
     calc_component_array: []
   };
 
@@ -13,31 +14,41 @@ class App extends Component {
   adnum = num => {
     this.setState({
       formula: this.state.formula + num + "",
-      calc_component: this.state.calc_component + num + ""
+      calc_component: this.state.calc_component + num + "",
+      operator: ""
     });
   };
 
   // 四則演算(×/+/÷/-/=)
   calc = cmd => {
     if (cmd === "=") {
+      if (this.state.calc_component === "") {
+        return;
+      }
       this.setState({
         formula: eval(this.state.formula),
-        calc_component: ""
+        calc_component: "",
+        display_result: eval(this.state.formula)
       });
     } else {
-      if (this.state.calc_component === "") {
+      if (this.state.operator !== "") {
+        this.state.calc_component_array.pop();
         this.setState({
+          operator: cmd,
+          formula: this.state.formula.slice(0, -1) + cmd,
           calc_component_array: this.state.calc_component_array.concat(cmd)
         });
+      } else {
+        const cmd_and_num = [this.state.calc_component, cmd];
+        this.setState({
+          calc_component_array: this.state.calc_component_array.concat(
+            cmd_and_num
+          ),
+          formula: this.state.formula + cmd + "",
+          calc_component: "",
+          operator: cmd
+        });
       }
-      const cmd_and_num = [this.state.calc_component, cmd];
-      this.setState({
-        calc_component_array: this.state.calc_component_array.concat(
-          cmd_and_num
-        ),
-        formula: this.state.formula + cmd + "",
-        calc_component: ""
-      });
     }
   };
 
@@ -49,11 +60,7 @@ class App extends Component {
       });
     } else if (cmd === "C") {
       if (this.state.calc_component === "") {
-        this.state.calc_component_array.pop();
-        this.setState({
-          formula: this.state.formula.slice(0, -1),
-          calc_component_array: this.state.calc_component_array
-        });
+        return;
       } else {
         this.setState({
           calc_component: "",
@@ -66,7 +73,7 @@ class App extends Component {
   // メモリー機能(M+/M-/MC)
   memory = cmd => {
     if (cmd === "M+") {
-      if (this.state.formula === "") {
+      if (this.state.formula === "" || this.state.calc_component === "") {
         return;
       }
       this.setState({
@@ -77,7 +84,7 @@ class App extends Component {
         calc_component: ""
       });
     } else if (cmd === "M-") {
-      if (this.state.formula === "") {
+      if (this.state.formula === "" || this.state.calc_component === "") {
         return;
       }
       this.setState({
