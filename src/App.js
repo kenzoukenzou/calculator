@@ -20,9 +20,13 @@ class App extends Component {
   // 四則演算(×/+/÷/-/=)
   calc = cmd => {
     if (cmd === "=") {
+      if (this.state.calc_component === "") {
+        return;
+      }
       this.setState({
         formula: eval(this.state.formula),
-        calc_component: ""
+        calc_component: "",
+        display_result: eval(this.state.formula)
       });
     } else {
       if (this.state.calc_component === "") {
@@ -66,7 +70,7 @@ class App extends Component {
   // メモリー機能(M+/M-/MC)
   memory = cmd => {
     if (cmd === "M+") {
-      if (this.state.formula === "") {
+      if (this.state.formula === "" || this.state.calc_component === "") {
         return;
       }
       this.setState({
@@ -77,7 +81,7 @@ class App extends Component {
         calc_component: ""
       });
     } else if (cmd === "M-") {
-      if (this.state.formula === "") {
+      if (this.state.formula === "" || this.state.calc_component === "") {
         return;
       }
       this.setState({
