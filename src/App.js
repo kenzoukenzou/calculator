@@ -60,11 +60,7 @@ class App extends Component {
       });
     } else if (cmd === "C") {
       if (this.state.calc_component === "") {
-        this.state.calc_component_array.pop();
-        this.setState({
-          formula: this.state.formula.slice(0, -1),
-          calc_component_array: this.state.calc_component_array
-        });
+        return;
       } else {
         this.setState({
           calc_component: "",
